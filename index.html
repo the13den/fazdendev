@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<title>Сайт фронтенд разработчика Фазалова Дениса</title>
+	<meta charset="UTF-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<!-- <style>body{opacity: 0;}</style> -->
+	<meta name="description" content="This the official fazdendev`s site" />
+	<meta name="keywords" content="HTML, CSS, Java Script, Frontend, Фазалов Денис, Fazalov Denis, fazdendev, portfolio, портфолио" />
+	<meta name="author" content="Fazalov Denis" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20220729232749" />
+	<link rel="shortcut icon" href="favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__container">
+				<a href="#" class="header__logo logo">fazdendev</a>
+				<div class="menu-header">
+					<button name="menu-button" type="button" class="icon-menu"><span></span></button>
+					<nav class="menu-header__body">
+						<ul class="menu-header__list">
+							<li class="menu-header__item">
+								<a data-scroll href="#main-screen" class="menu-header__link">Главная</a>
+							</li>
+							<li class="menu-header__item">
+								<a data-scroll href="#techstack" class="menu-header__link">Набор технологий</a>
+							</li>
+							<li class="menu-header__item">
+								<a data-scroll href="#projects" class="menu-header__link">Работы</a>
+							</li>
+							<li class="menu-header__item">
+								<a data-scroll href="#contacts" class="menu-header__link">Контакты</a>
+							</li>
+						</ul>
+						<ul class="menu-header__round-buttons round-buttons">
+							<li class="round-buttons__item">
+								<button name="change theme button" class="_icon-daytheme theme-button round-button"></button>
+							</li>
+							<li class="round-buttons__item">
+								<button name="choose language button" class="language-button round-button">En</button>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<main class="main-page">
+			<section id="main-screen" class="main-screen main-page__main-screen">
+				<div class="main-screen__container">
+					<div class="main-screen__wrapper">
+						<h1 class="main-screen__headline-text headline-text">
+							Привет
+							<span class="emoji"><picture><source srcset="img/main-screen/waving-hand_1f44b.webp" type="image/webp"><img src="img/main-screen/waving-hand_1f44b.png" alt="👋" /></picture></span>,<br />
+							Меня зовут<br /><span class="gradient-highlight main-screen__gradient-highlight"> Фазалов Денис</span> <br />И моя страсть - это создание сайтов
+						</h1>
+						<div class="main-screen__photo">
+							<picture><source srcset="img/main-screen/fazdendev.webp" type="image/webp"><img src="img/main-screen/fazdendev.png" alt="denis's photo" /></picture>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="techstack" class="tech-stack main-page__tech-stack">
+				<div class="tech-stack__container">
+					<div class="tech-stack__headings headings">
+						<h2 class="headings__title title">Набор технологий</h2>
+						<h3 class="headings__subtitle subtitle">Технологии, с которыми я работал недавно</h3>
+					</div>
+					<div class="tech-stack__cards">
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/html.svg" alt="html" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/css.svg" alt="css" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/js.svg" alt="js" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/bem.svg" alt="bem" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/sass.svg" alt="sass/scss" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/pugjs-icon.svg" alt="pug" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/gulp.svg" alt="gulp" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/bootstrap.svg" alt="bootstrap" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/Wordpress-Logo.svg" alt="wordpress" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/vscode.svg" alt="vscode" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/git-icon.svg" alt="git" />
+						</div>
+						<div class="card-tech-stack">
+							<img src="img/tech-stack/github.svg" alt="github" />
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="projects" class="projects main-page__projects">
+				<div class="projects__container">
+					<div class="projects__headings headings">
+						<h2 class="headings__title title">Проекты</h2>
+						<h3 class="headings__subtitle subtitle">Работы, сделанные мной</h3>
+					</div>
+					<div class="project__cards">
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/df.webp" type="image/webp"><img src="img/projects/df.png" alt="insight landing main-page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/hs.webp" type="image/webp"><img src="img/projects/hs.png" alt="insight landing page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/df.webp" type="image/webp"><img src="img/projects/df.png" alt="insight landing page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/hs.webp" type="image/webp"><img src="img/projects/hs.png" alt="insight landing page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/df.webp" type="image/webp"><img src="img/projects/df.png" alt="insight landing page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="project__card">
+							<div class="card-project">
+								<a href="#" class="card-project__picture"><picture><source srcset="img/projects/hs.webp" type="image/webp"><img src="img/projects/hs.png" alt="insight landing page" /></picture></a>
+								<div class="card-project__content">
+									<h4 class="card-project__title">Project Tile goes here</h4>
+									<h6 class="card-project__info">This is sample project description random things are here in description This is sample project lorem ipsum generator for dummy content</h6>
+									<h5 class="card-project__technologies"><strong class="card-project__technologies_fw-normal">Tech stack:</strong> HTML , JavaScript, SASS, React</h5>
+									<ul class="links-card-project">
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-link-chain"></span><span class="links-card-project__text">Прямая ссылка</span></a>
+										</li>
+										<li class="links-card-project__item">
+											<a href="#" class="links-card-project__link"><span class="links-card-project__ico _icon-github"></span><span class="links-card-project__text"> Код</span></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="contacts" class="contacts main-page__projects">
+				<div class="contacts__container">
+					<div class="contacts__headings headings">
+						<h2 class="headings__title title">Связаться со мной</h2>
+						<h3 class="headings__subtitle subtitle">Вы можете заполнить форму, написать мне на <a href="mailto:fazdendev@gmail.com" class="subtitle__link">email</a> или в <a href="https://t.me/fazdendev" class="subtitle__link">телеграмм</a></h3>
+					</div>
+					<div class="contacts__wrapper">
+						<div class="contacts__content">
+							<h1 class="contacts__headline-text headline-text">Оставьте вопрос и я вам отвечу!</h1>
+							<div class="contacts__background background">
+								<picture><source srcset="img/contacts/coding-img.webp" type="image/webp"><img src="img/contacts/coding-img.jpg" alt="coding process img" /></picture>
+							</div>
+						</div>
+						<div class="contacts__column">
+							<form name="feedback" id="feedback" data-cfasync="false" action="https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec" data-email="fazdendev@gmail.com" method="POST" class="gform feedback-form contacts__feedback-form">
+								<div style="display: none" class="thankyou_message">
+									<h2><em>Thanks</em> for contacting us! We will get back to you soon!</h2>
+								</div>
+								<div class="feedback-form__wrapper">
+									<ul class="feedback-form__items">
+										<li class="feedback-form__item item-form">
+											<label class="item-form__title" for="email">Ваш Email</label>
+											<input name="email" class="item-form__line" type="email" id="email" />
+										</li>
+										<li class="feedback-form__item item-form">
+											<label class="item-form__title" for="name">Ваше имя</label>
+											<input name="name" class="item-form__line" type="text" id="name" />
+										</li>
+										<li class="feedback-form__item item-form">
+											<label class="item-form__title" for="message">Ваше сообщение</label>
+											<textarea name="message" class="item-form__textarea" id="message"></textarea>
+										</li>
+									</ul>
+									<button type="submit" class="feedback-form__button">Отправить</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__container">
+				<div class="footer__row footer__row_underlined">
+					<div class="footer__content-wrapper">
+						<a href="#" class="footer__logo logo">fazdendev</a>
+						<div class="footer__contacts">
+							<a href="mailto:fazdendev@gmail.com" class="footer__contact">fazdendev@gmail.com</a>
+							<div class="footer__buttons">
+								<ul class="round-buttons round-buttons_social">
+									<li class="round-buttons__item">
+										<a href="https://github.com/fazdendev" class="_icon-github round-button round-button_fz-zero">Githib</a>
+									</li>
+									<!-- <li class="round-buttons__item">
+                <button class="_icon-habr round-button round-button_filled"></button>
+              </li> -->
+									<li class="round-buttons__item">
+										<a href="https://t.me/fazdendev" class="_icon-telegram round-button round-button_fz-zero">Telegram</a>
+									</li>
+								</ul>
+								<ul class="round-buttons round-buttons_settings">
+									<li class="round-buttons__item">
+										<button name="change theme button" class="_icon-daytheme theme-button round-button"></button>
+									</li>
+									<li class="round-buttons__item">
+										<button name="choose language button" class="language-button round-button">En</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer__row">
+					<div class="nav-footer">
+						<nav class="nav-footer__body">
+							<ul class="nav-footer__list">
+								<li class="nav-footer__item">
+									<a data-scroll href="#main-screen" class="menu-header__link">Главная</a>
+								</li>
+								<li class="nav-footer__item">
+									<a data-scroll href="#techstack" class="menu-header__link">Набор технологий</a>
+								</li>
+								<li class="nav-footer__item">
+									<a data-scroll href="#projects">Работы</a>
+								</li>
+								<li class="nav-footer__item">
+									<a data-scroll href="#contacts">Контакты</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js?_v=20220729232749"></script>
+	<script src="js/app.min.js?_v=20220729232749"></script>
+
+</body>
+
+</html>
