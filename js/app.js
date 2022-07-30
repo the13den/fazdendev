@@ -31,8 +31,9 @@
                 header.classList.toggle("_menu-open");
                 document.body.classList.toggle("lock");
                 header.classList.remove("_menu-closed");
+                header.classList.remove("_menu-loaded");
             }
-            if (!header.classList.contains("_menu-open")) header.classList.toggle("_menu-closed");
+            if (!header.classList.contains("_menu-open") && !header.classList.contains("_menu-loaded")) header.classList.add("_menu-closed");
         }
     }
     initMobileMenu();
@@ -81,22 +82,62 @@
         if (userAgent.includes("irefox")) adaptiveSizePageScale();
     }
     firefoxAdaptiveSizePageScale();
-    document.querySelector(".feedback-form__button");
-    const script_form = document.querySelector("#feedback");
-    script_form.onsubmit = async e => {
-        let formData = new FormData(script_form);
-        alert("start");
-        e.preventDefault();
-        let xhr = new XMLHttpRequest;
-        xhr.open("POST", "https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec");
-        xhr.send(formData);
-        xhr.onload = function() {
-            if (200 != xhr.status) alert(`Ошибка Отравки`); else alert(`Форма отправленна`);
-        };
-    };
+    function validateForm() {
+        let error = 0;
+        let formReq = document.querySelectorAll("._req");
+        for (let index = 0; index < formReq.length; index++) {
+            const input = formReq[index];
+            console.log(input);
+            inputRemoveError(input);
+            if ("" === input.value || " " === input.value) {
+                inputAddError(input);
+                error++;
+            } else if (input.classList.contains("_email")) if (false == validateEmail(input)) {
+                inputAddError(input);
+                error++;
+            }
+        }
+        return error;
+    }
+    function inputAddError(input) {
+        input.parentElement.classList.add("_error");
+        input.classList.add("_error");
+    }
+    function inputRemoveError(input) {
+        input.parentElement.classList.remove("_error");
+        input.classList.remove("_error");
+    }
+    function validateEmail(email) {
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        var address = email.value;
+        if (false == reg.test(address)) return false;
+    }
     new SmoothScroll('a[href*="#"]', {
         speed: 300
     });
+    function initForm() {
+        let formButton;
+        let form;
+        document.addEventListener("click", (function(e) {
+            if (e.target.closest(".feedback-form__button")) {
+                e.preventDefault();
+                formButton = e.target.closest(".feedback-form__button");
+                form = formButton.closest(".feedback-form");
+                let error = validateForm();
+                if (0 === error) {
+                    let formData = new FormData(form);
+                    alert("Отправка начата");
+                    let xhr = new XMLHttpRequest;
+                    xhr.open("POST", "https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec");
+                    xhr.send(formData);
+                    xhr.onload = function() {
+                        if (200 != xhr.status) alert(`Ошибка Отравки`); else alert(`Форма отправленна`);
+                    };
+                }
+            }
+        }));
+    }
+    initForm();
     window["FLS"] = true;
     isWebp();
 })();
