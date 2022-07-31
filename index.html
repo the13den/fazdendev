@@ -9,7 +9,7 @@
 	<meta name="description" content="This the official fazdendev`s site" />
 	<meta name="keywords" content="HTML, CSS, Java Script, Frontend, Фазалов Денис, Fazalov Denis, fazdendev, portfolio, портфолио" />
 	<meta name="author" content="Fazalov Denis" />
-	<link rel="stylesheet" href="css/style.min.css?_v=20220730172813" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20220731235413" />
 	<link rel="shortcut icon" href="favicon.ico" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -251,17 +251,21 @@
 										<li class="feedback-form__item item-form">
 											<label class="item-form__title" for="email">Ваш Email</label>
 											<input name="email" class="item-form__line _email _req" type="email" id="email" />
+											<div class="input-error-message input-error-message_email">Пожалуйста введите корректный адресс электронной почты</div>
+											<div class="input-error-message input-error-message_blank">Пожалуйста заполните поле</div>
 										</li>
 										<li class="feedback-form__item item-form">
 											<label class="item-form__title" for="name">Ваше имя</label>
 											<input name="name" class="item-form__line _req" type="text" id="name" />
+											<div class="input-error-message input-error-message_blank">Пожалуйста заполните поле</div>
 										</li>
 										<li class="feedback-form__item item-form">
 											<label class="item-form__title" for="message">Ваше сообщение</label>
 											<textarea name="message" class="item-form__textarea _req" id="message"></textarea>
+											<div class="input-error-message input-error-message_blank">Пожалуйста заполните поле</div>
 										</li>
 									</ul>
-									<button type="submit" class="feedback-form__button">Отправить</button>
+									<button type="submit" class="feedback-form__button"><span class="_content-not-sent">Отправить</span><span class="_content-sent">Сообщение отправленно</span></button>
 								</div>
 							</form>
 						</div>
@@ -324,8 +328,8 @@
 		</footer>
 
 	</div>
-	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js?_v=20220730172813"></script>
-	<script src="js/app.min.js?_v=20220730172813"></script>
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js?_v=20220731235413"></script>
+	<script src="js/app.min.js?_v=20220731235413"></script>
 
 </body>
 
