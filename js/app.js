@@ -85,40 +85,31 @@
     new SmoothScroll('a[href*="#"]', {
         speed: 300
     });
-    if (localStorage.formSent) ;
-    let todayDate = new Date;
-    let todayDay = todayDate.getDate();
-    let todayMonth = todayDate.getMonth();
     function initForm() {
         let formButton;
         let forms = document.querySelectorAll(".feedback-form");
         let form;
         let localFormSent;
-        if (localStorage.formSent) localFormSent = JSON.parse(localStorage.formSent); else localFormSent = 0;
-        formSentDailyReset();
-        function formSentDailyReset() {
-            if (localFormSent.day != todayDay || localFormSent.month != todayMonth) localStorage.formSent = JSON.stringify({
-                value: 0,
-                day: todayDay,
-                month: todayMonth
-            });
-        }
+        if (sessionStorage.formSent) localFormSent = JSON.parse(sessionStorage.formSent); else localFormSent = 0;
         for (let index = 0; index < forms.length; index++) {
             let form = forms[index];
             checkFormSent(form);
         }
-        function checkFormSent(form) {
-            if (localFormSent.value) addClassFormSent(form); else removeClassFormSent(form);
-            function addClassFormSent(form) {
-                form.classList.add("_form-sent");
-            }
-            function removeClassFormSent(form) {
-                form.classList.remove("_form-sent");
-            }
+        function addClassFormSentSuccess(form, vanishDelay) {
+            form.classList.add("_form-sent-success");
+            setTimeout((function() {
+                form.classList.remove("_form-sent-success");
+            }), vanishDelay);
+        }
+        function addClassFormSentError(form, vanishDelay) {
+            form.classList.add("_form-sent-error");
+            setTimeout((function() {
+                form.classList.remove("_form-sent-error");
+            }), vanishDelay);
         }
         function validateForm(form) {
             let error = 0;
-            let formReq = document.querySelectorAll("._req");
+            let formReq = form.querySelectorAll("._req");
             for (let index = 0; index < formReq.length; index++) {
                 const input = formReq[index];
                 if (form.contains(input)) {
@@ -156,6 +147,15 @@
                 if (false == reg.test(address)) return false;
             }
         }
+        function checkFormSent(form) {
+            if (localFormSent.value) addClassFormSent(form); else removeClassFormSent(form);
+            function addClassFormSent(form) {
+                form.classList.add("_form-sent");
+            }
+            function removeClassFormSent(form) {
+                form.classList.remove("_form-sent");
+            }
+        }
         document.addEventListener("click", (function(e) {
             if (e.target.closest(".feedback-form__button")) {
                 e.preventDefault();
@@ -163,23 +163,31 @@
                 form = formButton.closest(".feedback-form");
                 let error = validateForm(form);
                 if (0 === error) {
+                    let abortTimeout;
                     let formData = new FormData(form);
                     let xhr = new XMLHttpRequest;
                     xhr.open("POST", "https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec");
                     xhr.send(formData);
                     form.classList.add("_form-sending");
+                    clearTimeout(abortTimeout);
+                    abortTimeout = setTimeout((function() {
+                        xhr.abort();
+                        addClassFormSentError(form, 1e4);
+                        form.classList.remove("_form-sending");
+                    }), 6e4);
                     xhr.onload = function() {
                         if (200 != xhr.status) {
+                            addClassFormSentError(form, 7e3);
                             form.classList.remove("_form-sending");
-                            alert(`Ошибка Отравки`);
+                            clearTimeout(abortTimeout);
                         } else {
+                            addClassFormSentSuccess(form, 4e3);
                             form.classList.remove("_form-sending");
-                            localStorage.formSent = JSON.stringify({
-                                value: 1,
-                                day: todayDay,
-                                month: todayMonth
+                            clearTimeout(abortTimeout);
+                            sessionStorage.formSent = JSON.stringify({
+                                value: 1
                             });
-                            localFormSent = JSON.parse(localStorage.formSent);
+                            localFormSent = JSON.parse(sessionStorage.formSent);
                             checkFormSent(form);
                         }
                     };
@@ -188,6 +196,48 @@
         }));
     }
     initForm();
+    function initDarkTheme() {
+        let browserDarkTheme = 0;
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            document.body.classList.remove("theme_light");
+            document.body.classList.add("theme_dark");
+            browserDarkTheme = 1;
+        } else {
+            document.body.classList.remove("theme_dark");
+            document.body.classList.add("theme_light");
+        }
+        if ("light" == localStorage.theme) {
+            browserDarkTheme = 0;
+            document.body.classList.remove("theme_dark");
+            document.body.classList.add("theme_light");
+        } else if ("dark" == localStorage.theme) {
+            browserDarkTheme = 1;
+            document.body.classList.remove("theme_light");
+            document.body.classList.add("theme_dark");
+        }
+        console.log(browserDarkTheme);
+        document.addEventListener("click", changeThemeOnClick);
+        function changeThemeOnClick(e) {
+            console.log(browserDarkTheme);
+            if (e.target.closest(".theme-button") && 1 == browserDarkTheme) {
+                localStorage.clear("theme");
+                localStorage.setItem("theme", "light");
+                browserDarkTheme = 0;
+            } else if (e.target.closest(".theme-button")) {
+                browserDarkTheme = 1;
+                localStorage.clear("theme");
+                localStorage.setItem("theme", "dark");
+            }
+            if ("light" == localStorage.theme) {
+                document.body.classList.remove("theme_dark");
+                document.body.classList.add("theme_light");
+            } else if ("dark" == localStorage.theme) {
+                document.body.classList.remove("theme_light");
+                document.body.classList.add("theme_dark");
+            }
+        }
+    }
+    initDarkTheme();
     window["FLS"] = true;
     isWebp();
 })();
