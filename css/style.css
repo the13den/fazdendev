@@ -826,6 +826,7 @@ body {
 }
 
 .theme_dark ._form-sending::after {
+  background: url(../img/feedback-form/loading.gif) center/70px 70px no-repeat;
   background-color: #1c1b22;
 }
 
@@ -846,6 +847,9 @@ body {
   transition: opacity 0.5s, background 0.5s;
   border-radius: 20px;
 }
+
+.no-webp .theme_dark ._form-sent-error::after{
+  background: url(../img/feedback-form/failed.png) center/50px 50px no-repeat; }
 
 .theme_dark ._form-sent-error::after {
   background-color: #1c1b22;
@@ -882,6 +886,9 @@ body {
   transition: opacity 0.5s, background 0.5s;
   border-radius: 20px;
 }
+
+.no-webp .theme_dark ._form-sent-success::after{
+  background: url(../img/feedback-form/success.png) center/50px 50px no-repeat; }
 
 .theme_dark ._form-sent-success::after {
   background-color: #1c1b22;
@@ -2566,4 +2573,8 @@ body {
 
 .webp ._form-sent-error::after{ background: url(../img/feedback-form/failed.webp) center/50px 50px no-repeat; }
 
+.webp .theme_dark ._form-sent-error::after{ background: url(../img/feedback-form/failed.webp) center/50px 50px no-repeat; }
+
 .webp ._form-sent-success::after{ background: url(../img/feedback-form/success.webp) center/50px 50px no-repeat; }
+
+.webp .theme_dark ._form-sent-success::after{ background: url(../img/feedback-form/success.webp) center/50px 50px no-repeat; }
