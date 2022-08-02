@@ -90,22 +90,11 @@
         let forms = document.querySelectorAll(".feedback-form");
         let form;
         let localFormSent;
+        let sendConfirmation = 0;
         if (sessionStorage.formSent) localFormSent = JSON.parse(sessionStorage.formSent); else localFormSent = 0;
         for (let index = 0; index < forms.length; index++) {
             let form = forms[index];
             checkFormSent(form);
-        }
-        function addClassFormSentSuccess(form, vanishDelay) {
-            form.classList.add("_form-sent-success");
-            setTimeout((function() {
-                form.classList.remove("_form-sent-success");
-            }), vanishDelay);
-        }
-        function addClassFormSentError(form, vanishDelay) {
-            form.classList.add("_form-sent-error");
-            setTimeout((function() {
-                form.classList.remove("_form-sent-error");
-            }), vanishDelay);
         }
         function validateForm(form) {
             let error = 0;
@@ -156,6 +145,22 @@
                 form.classList.remove("_form-sent");
             }
         }
+        function clearFormInputs(form) {
+            if (form.querySelectorAll("input").length) {
+                const inputs = form.querySelectorAll("input");
+                for (let index = 0; index < inputs.length; index++) {
+                    const input = inputs[index];
+                    if (input) input.value = "";
+                }
+            }
+            if (form.querySelectorAll("textarea").length) {
+                const textareas = form.querySelectorAll("textarea");
+                for (let index = 0; index < textareas.length; index++) {
+                    const textarea = textareas[index];
+                    if (textarea) textarea.value = "";
+                }
+            }
+        }
         document.addEventListener("click", (function(e) {
             if (e.target.closest(".feedback-form__button")) {
                 e.preventDefault();
@@ -163,34 +168,68 @@
                 form = formButton.closest(".feedback-form");
                 let error = validateForm(form);
                 if (0 === error) {
-                    let abortTimeout;
-                    let formData = new FormData(form);
-                    let xhr = new XMLHttpRequest;
-                    xhr.open("POST", "https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec");
-                    xhr.send(formData);
-                    form.classList.add("_form-sending");
-                    clearTimeout(abortTimeout);
-                    abortTimeout = setTimeout((function() {
-                        xhr.abort();
-                        addClassFormSentError(form, 1e4);
-                        form.classList.remove("_form-sending");
-                    }), 6e4);
-                    xhr.onload = function() {
-                        if (200 != xhr.status) {
-                            addClassFormSentError(form, 7e3);
-                            form.classList.remove("_form-sending");
-                            clearTimeout(abortTimeout);
-                        } else {
-                            addClassFormSentSuccess(form, 4e3);
-                            form.classList.remove("_form-sending");
-                            clearTimeout(abortTimeout);
-                            sessionStorage.formSent = JSON.stringify({
-                                value: 1
-                            });
-                            localFormSent = JSON.parse(sessionStorage.formSent);
-                            checkFormSent(form);
+                    if (localFormSent.value && 1 == !sendConfirmation) sendConfirmation = 0;
+                    if (1 == sendConfirmation || !form.classList.contains("_form-sent")) {
+                        function sendForm(form, timeoutMs = 6e4, errorVanishDelayMs = 1e4, successVanishDelayMs = 7500) {
+                            let abortTimeout;
+                            let formData = new FormData(form);
+                            let xhr = new XMLHttpRequest;
+                            xhr.open("POST", "https://script.google.com/macros/s/AKfycbwz2VYI8q092-TvasLvhEn3cdKaBFpNYFyVwFUXzqea2kvjctVC5cXlda_eIaa9ZOSF/exec");
+                            xhr.send(formData);
+                            form.classList.add("_form-sending");
+                            abortSendFormOnTimeout(form, timeoutMs, errorVanishDelayMs);
+                            xhr.onload = function() {
+                                if (200 != xhr.status) {
+                                    addClassFormSentError(form, errorVanishDelayMs);
+                                    form.classList.remove("_form-sending");
+                                    clearTimeout(abortTimeout);
+                                    form.classList.remove("_confirm-sending");
+                                    sendConfirmation = 0;
+                                } else {
+                                    addClassFormSentSuccess(form, successVanishDelayMs);
+                                    form.classList.remove("_form-sending");
+                                    clearTimeout(abortTimeout);
+                                    sessionStorage.formSent = JSON.stringify({
+                                        value: 1
+                                    });
+                                    localFormSent = JSON.parse(sessionStorage.formSent);
+                                    checkFormSent(form);
+                                    form.classList.remove("_confirm-sending");
+                                    sendConfirmation = 0;
+                                    setTimeout(clearFormInputs, successVanishDelayMs, form);
+                                }
+                            };
+                            function addClassFormSentSuccess(form, vanishDelay) {
+                                form.classList.add("_form-sent-success");
+                                setTimeout((function() {
+                                    form.classList.remove("_form-sent-success");
+                                }), vanishDelay);
+                            }
+                            function addClassFormSentError(form, vanishDelay) {
+                                form.classList.add("_form-sent-error");
+                                setTimeout((function() {
+                                    form.classList.remove("_form-sent-error");
+                                }), vanishDelay);
+                            }
+                            function abortSendFormOnTimeout(form, timeoutMs = 6e4, errorVanishDelayMs = 1e4) {
+                                clearTimeout(abortTimeout);
+                                abortTimeout = setTimeout((function() {
+                                    xhr.abort();
+                                    addClassFormSentError(form, errorVanishDelayMs);
+                                    form.classList.remove("_form-sending");
+                                    form.classList.remove("_confirm-sending");
+                                    sendConfirmation = 0;
+                                }), timeoutMs);
+                            }
                         }
-                    };
+                        sendForm(form);
+                    } else if (localFormSent.value) {
+                        form.classList.add("_confirm-sending");
+                        sendConfirmation = 1;
+                    }
+                } else if (localFormSent.value) {
+                    form.classList.remove("_confirm-sending");
+                    sendConfirmation = 0;
                 }
             }
         }));
@@ -205,39 +244,41 @@
         } else {
             document.body.classList.remove("theme_dark");
             document.body.classList.add("theme_light");
+            browserDarkTheme = 0;
         }
         if ("light" == localStorage.theme) {
-            browserDarkTheme = 0;
             document.body.classList.remove("theme_dark");
             document.body.classList.add("theme_light");
+            browserDarkTheme = 0;
         } else if ("dark" == localStorage.theme) {
-            browserDarkTheme = 1;
             document.body.classList.remove("theme_light");
             document.body.classList.add("theme_dark");
+            browserDarkTheme = 1;
         }
-        console.log(browserDarkTheme);
         document.addEventListener("click", changeThemeOnClick);
         function changeThemeOnClick(e) {
-            console.log(browserDarkTheme);
             if (e.target.closest(".theme-button") && 1 == browserDarkTheme) {
                 localStorage.clear("theme");
                 localStorage.setItem("theme", "light");
                 browserDarkTheme = 0;
             } else if (e.target.closest(".theme-button")) {
-                browserDarkTheme = 1;
                 localStorage.clear("theme");
                 localStorage.setItem("theme", "dark");
+                browserDarkTheme = 1;
             }
             if ("light" == localStorage.theme) {
                 document.body.classList.remove("theme_dark");
                 document.body.classList.add("theme_light");
+                browserDarkTheme = 0;
             } else if ("dark" == localStorage.theme) {
                 document.body.classList.remove("theme_light");
                 document.body.classList.add("theme_dark");
+                browserDarkTheme = 1;
             }
         }
     }
     initDarkTheme();
+    я;
     window["FLS"] = true;
     isWebp();
 })();

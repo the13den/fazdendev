@@ -194,6 +194,9 @@ h6 {
 }
 
 body {
+  -webkit-transition: color 0.3s, background 0.3s;
+  -o-transition: color 0.3s, background 0.3s;
+  transition: color 0.3s, background 0.3s;
   -webkit-transform-origin: top left;
       -ms-transform-origin: top left;
           transform-origin: top left;
@@ -445,6 +448,9 @@ body {
   outline: 2px solid #bdbdc9;
   background: #bdbdc9;
   color: #1c1b22;
+  -webkit-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
+  -o-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
+  transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
 }
 
 .round-button::before {
@@ -476,6 +482,9 @@ body {
 .theme_dark .round-button:hover::before {
   background: #1c1b22;
   color: #fff;
+  -webkit-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
+  -o-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
+  transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
 }
 
 .round-button_filled {
@@ -505,9 +514,6 @@ body {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
   outline: 0px;
-  -webkit-transition: color 0.3s, background 0.3s, outline 0.3s;
-  -o-transition: color 0.3s, background 0.3s, outline 0.3s;
-  transition: color 0.3s, background 0.3s, outline 0.3s;
   border: 2px #42446e solid;
 }
 
@@ -528,9 +534,6 @@ body {
   outline: 0px;
   background: #1c1b22;
   color: #fff;
-  -webkit-transition: color 0.3s, background 0.3s, outline 0.3s;
-  -o-transition: color 0.3s, background 0.3s, outline 0.3s;
-  transition: color 0.3s, background 0.3s, outline 0.3s;
 }
 
 .theme-button {
@@ -541,9 +544,6 @@ body {
 }
 
 .theme-button:hover {
-  -webkit-transition: color 0.3s, background 0.3s, outline 0s;
-  -o-transition: color 0.3s, background 0.3s, outline 0s;
-  transition: color 0.3s, background 0.3s, outline 0s;
   outline: 0px transparent;
 }
 
@@ -552,9 +552,6 @@ body {
 }
 
 .theme-button::before {
-  -webkit-transition: color 0.3s, border 0.3s, background 0.3s, outline 0s;
-  -o-transition: color 0.3s, border 0.3s, background 0.3s, outline 0s;
-  transition: color 0.3s, border 0.3s, background 0.3s, outline 0s;
   border: 2px solid #42446e;
   outline: 0px transparent;
 }
@@ -564,9 +561,6 @@ body {
 }
 
 .theme-button:hover::before {
-  -webkit-transition: color 0.3s, background 0.3s, outline 0s;
-  -o-transition: color 0.3s, background 0.3s, outline 0s;
-  transition: color 0.3s, background 0.3s, outline 0s;
   border: 2px solid #31903c;
   background: #31903c;
   outline: 0px transparent;
@@ -588,6 +582,9 @@ body {
   font-size: 2rem;
   color: #666666;
   line-height: 1.2;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .theme_dark .subtitle {
@@ -596,6 +593,28 @@ body {
 
 .subtitle__link {
   font-weight: 700;
+  -webkit-transition: font-weight 0.3s, color 0.3s;
+  -o-transition: font-weight 0.3s, color 0.3s;
+  transition: font-weight 0.3s, color 0.3s;
+}
+
+.subtitle__link:hover {
+  color: #31903c;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
+}
+
+.theme_dark .subtitle__link {
+  color: #bdbdc9;
+}
+
+.theme_dark .subtitle__link:hover {
+  color: #fff;
+}
+
+.theme_dark .subtitle__link {
+  font-weight: 800;
 }
 
 .headings {
@@ -633,6 +652,10 @@ body {
 
 .feedback-form {
   position: relative;
+  z-index: 1;
+  -webkit-transition: background 0.3s;
+  -o-transition: background 0.3s;
+  transition: background 0.3s;
 }
 
 .theme_dark .feedback-form {
@@ -652,6 +675,30 @@ body {
   -webkit-transition: opacity 0.5s, background 0.5s, width 0s 0.5s, height 0s 0.5s;
   -o-transition: opacity 0.5s, background 0.5s, width 0s 0.5s, height 0s 0.5s;
   transition: opacity 0.5s, background 0.5s, width 0s 0.5s, height 0s 0.5s;
+}
+
+.feedback-form__status-img {
+  width: 0px;
+  height: 0px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  left: 50%;
+  -webkit-transition: width 0s 0.3s, height 0s 0.3s, opacity 0.3s;
+  -o-transition: width 0s 0.3s, height 0s 0.3s, opacity 0.3s;
+  transition: width 0s 0.3s, height 0s 0.3s, opacity 0.3s;
+}
+
+.feedback-form__status-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .feedback-form__wrapper {
@@ -696,10 +743,33 @@ body {
   line-height: 1.1;
   position: relative;
   width: 100%;
+  -webkit-transition: background 0.3s, height 0.3s;
+  -o-transition: background 0.3s, height 0.3s;
+  transition: background 0.3s, height 0.3s;
+}
+
+.feedback-form__button:hover {
+  background: #42446e;
 }
 
 ._form-sent .feedback-form__button {
   background: #42446e;
+}
+
+._form-sent .feedback-form__button:hover {
+  background: #31903c;
+}
+
+._form-sending .feedback-form__button {
+  background: #6c6c00;
+}
+
+._confirm-sending .feedback-form__button {
+  background: #6c6c00;
+}
+
+._confirm-sending .feedback-form__button:hover {
+  background: #888800;
 }
 
 .item-form {
@@ -719,6 +789,9 @@ body {
   font-weight: 600;
   color: #000000;
   line-height: 1.1;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .theme_dark .item-form__title {
@@ -736,9 +809,9 @@ body {
   border-radius: 10px;
   padding: 15px;
   width: 100%;
-  -webkit-transition: border 0.3s;
-  -o-transition: border 0.3s;
-  transition: border 0.3s;
+  -webkit-transition: border 0.3s, color 0.3s, background 0.3s;
+  -o-transition: border 0.3s, color 0.3s, background 0.3s;
+  transition: border 0.3s, color 0.3s, background 0.3s;
 }
 
 .theme_dark .item-form__line {
@@ -749,9 +822,6 @@ body {
 
 [class*=error] .item-form__line {
   border: 2px solid #ff1e1e;
-  -webkit-transition: border 0.3s;
-  -o-transition: border 0.3s;
-  transition: border 0.3s;
 }
 
 .item-form__textarea {
@@ -763,9 +833,9 @@ body {
   resize: vertical;
   width: 100%;
   min-height: 150px;
-  -webkit-transition: border 0.3s;
-  -o-transition: border 0.3s;
-  transition: border 0.3s;
+  -webkit-transition: border 0.3s, color 0.3s, background 0.3s;
+  -o-transition: border 0.3s, color 0.3s, background 0.3s;
+  transition: border 0.3s, color 0.3s, background 0.3s;
 }
 
 .theme_dark .item-form__textarea {
@@ -776,9 +846,6 @@ body {
 
 [class*=error] .item-form__textarea {
   border: 2px solid #ff1e1e;
-  -webkit-transition: border 0.3s;
-  -o-transition: border 0.3s;
-  transition: border 0.3s;
 }
 
 .input-error-message {
@@ -816,22 +883,42 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  background: url(../img/feedback-form/loading.gif) center/70px 70px no-repeat;
+  background: url(../img/feedback-form/loading.svg) center/70px 70px no-repeat;
   background-color: #fff;
   opacity: 0.9;
-  -webkit-transition: opacity 0.5s;
-  -o-transition: opacity 0.5s;
-  transition: opacity 0.5s;
-  border-radius: 20px;
+  -webkit-transition: opacity 0.5s, background-color 0.3s;
+  -o-transition: opacity 0.5s, background-color 0.3s;
+  transition: opacity 0.5s, background-color 0.3s;
+  z-index: 2;
 }
 
 .theme_dark ._form-sending::after {
-  background: url(../img/feedback-form/loading.gif) center/70px 70px no-repeat;
   background-color: #1c1b22;
 }
 
-.no-webp ._form-sent-error::after{
-  background: url(../img/feedback-form/failed.png) center/50px 50px no-repeat; }
+._form-sending .item-form__line {
+  border: 2px solid #6c6c00;
+  -webkit-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  transition: border 0.5s;
+}
+
+._form-sending .item-form__textarea {
+  border: 2px solid #6c6c00;
+  -webkit-transition: border 0.5s;
+  -o-transition: border 0.5s;
+  transition: border 0.5s;
+}
+
+._form-sent-error .feedback-form__error-img {
+  width: 70px;
+  opacity: 1;
+  height: 70px;
+  -webkit-transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  -o-transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  visibility: visible;
+}
 
 ._form-sent-error::after {
   content: "";
@@ -842,14 +929,11 @@ body {
   height: 100%;
   background-color: #fff;
   opacity: 0.9;
-  -webkit-transition: opacity 0.5s, background 0.5s;
-  -o-transition: opacity 0.5s, background 0.5s;
-  transition: opacity 0.5s, background 0.5s;
-  border-radius: 20px;
+  -webkit-transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  -o-transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  z-index: 2;
 }
-
-.no-webp .theme_dark ._form-sent-error::after{
-  background: url(../img/feedback-form/failed.png) center/50px 50px no-repeat; }
 
 .theme_dark ._form-sent-error::after {
   background-color: #1c1b22;
@@ -857,11 +941,8 @@ body {
 
 ._form-sent-error .feedback-form__button {
   font-size: 0;
-  z-index: 2;
+  z-index: 1;
   background: #ff1e1e;
-  -webkit-transition: background 0.5s;
-  -o-transition: background 0.5s;
-  transition: background 0.5s;
 }
 
 ._form-sent-error .feedback-form__button::before {
@@ -869,8 +950,19 @@ body {
   font-size: 1.125rem;
 }
 
-.no-webp ._form-sent-success::after{
-  background: url(../img/feedback-form/success.png) center/50px 50px no-repeat; }
+._form-sent-error .feedback-form__button span {
+  display: none;
+}
+
+._form-sent-success .feedback-form__success-img {
+  width: 70px;
+  opacity: 1;
+  height: 70px;
+  -webkit-transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  -o-transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  transition: opacity 0.3s, width 0s 0s, height 0s 0s;
+  visibility: visible;
+}
 
 ._form-sent-success::after {
   content: "";
@@ -881,14 +973,11 @@ body {
   height: 100%;
   background-color: #fff;
   opacity: 0.9;
-  -webkit-transition: opacity 0.5s, background 0.5s;
-  -o-transition: opacity 0.5s, background 0.5s;
-  transition: opacity 0.5s, background 0.5s;
-  border-radius: 20px;
+  -webkit-transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  -o-transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  transition: opacity 0.5s, background-color 0.3s, background 0.5s;
+  z-index: 2;
 }
-
-.no-webp .theme_dark ._form-sent-success::after{
-  background: url(../img/feedback-form/success.png) center/50px 50px no-repeat; }
 
 .theme_dark ._form-sent-success::after {
   background-color: #1c1b22;
@@ -896,15 +985,12 @@ body {
 
 ._form-sent-success .feedback-form__button {
   font-size: 0;
-  z-index: 2;
+  z-index: 1;
   background: #31903c;
-  -webkit-transition: background 0.5s;
-  -o-transition: background 0.5s;
-  transition: background 0.5s;
 }
 
 ._form-sent-success .feedback-form__button::before {
-  content: "Сообщение оптправленно";
+  content: "Отправленно успешно";
   font-size: 1.125rem;
 }
 
@@ -930,11 +1016,43 @@ body {
   display: inline;
 }
 
+._confirm-sending ._content-sent {
+  display: none;
+}
+
+._form-sending ._content-sent {
+  display: none;
+}
+
+._content-confirm {
+  display: none;
+}
+
+._confirm-sending ._content-confirm {
+  display: inline;
+}
+
+._form-sending ._content-confirm {
+  display: none;
+}
+
+._content-sending {
+  display: none;
+}
+
+._form-sending ._content-sending {
+  display: inline;
+}
+
 ._content-not-sent {
   display: inline;
 }
 
 ._form-sent ._content-not-sent {
+  display: none;
+}
+
+._form-sending ._content-not-sent {
   display: none;
 }
 
@@ -1020,17 +1138,8 @@ body {
   color: #bdbdc9;
 }
 
-.theme_dark .menu-header__list a {
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
 .theme_dark .menu-header__list a:hover {
   color: #fff;
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
 }
 
 .round-buttons {
@@ -1086,6 +1195,9 @@ body {
   background: #42446e;
   opacity: 0.2;
   z-index: 3;
+  -webkit-transition: background 0.3s, opacity 0.3s;
+  -o-transition: background 0.3s, opacity 0.3s;
+  transition: background 0.3s, opacity 0.3s;
 }
 
 .theme_dark .footer__row_underlined::after {
@@ -1157,17 +1269,8 @@ body {
   color: #bdbdc9;
 }
 
-.theme_dark .footer__contacts a {
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
 .theme_dark .footer__contacts a:hover {
   color: #fff;
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
 }
 
 .footer__buttons {
@@ -1231,17 +1334,8 @@ body {
   color: #bdbdc9;
 }
 
-.theme_dark .nav-footer__list a {
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
-}
-
 .theme_dark .nav-footer__list a:hover {
   color: #fff;
-  -webkit-transition: color 0.3s;
-  -o-transition: color 0.3s;
-  transition: color 0.3s;
 }
 
 .nav-footer__item {
@@ -1395,6 +1489,9 @@ body {
   margin: 0 25px;
   -webkit-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.291);
           box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.291);
+  -webkit-transition: background 0.3s;
+  -o-transition: background 0.3s;
+  transition: background 0.3s;
   border-radius: 20px;
   overflow: hidden;
   min-width: 320px;
@@ -1442,14 +1539,17 @@ body {
   font-size: 1.75rem;
   line-height: 1.1;
   color: #000000;
-}
-
-.theme_dark .card-project__title {
-  color: #fff;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .card-project__title:not(:last-child) {
   margin-bottom: 0.7142857143em;
+}
+
+.theme_dark .card-project__title {
+  color: #fff;
 }
 
 .card-project__info {
@@ -1457,6 +1557,9 @@ body {
   line-height: 1.4;
   color: #666666;
   font-weight: 300;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .theme_dark .card-project__info {
@@ -1471,6 +1574,9 @@ body {
   line-height: 1.46;
   font-size: 0.875rem;
   font-weight: 300;
+  -webkit-transition: color 0.3s;
+  -o-transition: color 0.3s;
+  transition: color 0.3s;
 }
 
 .theme_dark .card-project__technologies {
@@ -1516,6 +1622,9 @@ body {
      -moz-column-gap: 5px;
           column-gap: 5px;
   border: 1px solid rgba(66, 68, 110, 0.1843137255);
+  -webkit-transition: color 0.3s, border 0.3s;
+  -o-transition: color 0.3s, border 0.3s;
+  transition: color 0.3s, border 0.3s;
   padding: 4px 10px;
   border-radius: 15px;
   -webkit-box-pack: justify;
@@ -1529,6 +1638,14 @@ body {
 
 .theme_dark .links-card-project__link {
   border: 1px solid #535353;
+}
+
+.theme_dark .links-card-project__link:hover {
+  border: 1px solid #fff;
+}
+
+.links-card-project__link:hover {
+  border: 1px solid #31903c;
 }
 
 .links-card-project__text {
@@ -1603,9 +1720,6 @@ body {
   margin-left: -50px;
   -webkit-box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.291);
           box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.291);
-}
-
-.theme_dark .contacts__column {
   overflow: hidden;
 }
 
@@ -2098,10 +2212,16 @@ body {
     background: rgba(255, 255, 255, 0.9607843137);
     opacity: 1;
     z-index: 2;
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
   }
 
   .theme_dark .header__container::before {
-    background: rgba(28, 27, 34, 0.9882352941);
+    background: rgba(28, 27, 34, 0.9921568627);
+    -webkit-transition: background 0.3s;
+    -o-transition: background 0.3s;
+    transition: background 0.3s;
   }
 
   .header__container::after {
@@ -2165,7 +2285,7 @@ body {
   }
 
   .theme_dark .menu-header__body {
-    background: rgba(28, 27, 34, 0.9607843137);
+    background: rgba(28, 27, 34, 0.9568627451);
   }
 
   ._menu-open .menu-header__body {
@@ -2200,6 +2320,10 @@ body {
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+  }
+
+  .footer__container {
+    padding-bottom: 30px;
   }
 
   .footer__row {
@@ -2570,11 +2694,3 @@ body {
     margin-bottom: inherit;
   }
 }
-
-.webp ._form-sent-error::after{ background: url(../img/feedback-form/failed.webp) center/50px 50px no-repeat; }
-
-.webp .theme_dark ._form-sent-error::after{ background: url(../img/feedback-form/failed.webp) center/50px 50px no-repeat; }
-
-.webp ._form-sent-success::after{ background: url(../img/feedback-form/success.webp) center/50px 50px no-repeat; }
-
-.webp .theme_dark ._form-sent-success::after{ background: url(../img/feedback-form/success.webp) center/50px 50px no-repeat; }
