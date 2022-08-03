@@ -264,6 +264,18 @@ body {
      object-fit: contain;
 }
 
+.first-load {
+  -webkit-transition: all 0s 0s !important;
+  -o-transition: all 0s 0s !important;
+  transition: all 0s 0s !important;
+}
+
+.first-load * {
+  -webkit-transition: all 0s 0s !important;
+  -o-transition: all 0s 0s !important;
+  transition: all 0s 0s !important;
+}
+
 @-webkit-keyframes gradientDark {
   0% {
     background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), color-stop(150%, #42446e));
