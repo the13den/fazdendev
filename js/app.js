@@ -278,7 +278,79 @@
         }
     }
     initDarkTheme();
-    я;
+    document.addEventListener("DOMContentLoaded", ready);
+    function ready() {
+        scrollProjectImagesOnHoverInit();
+    }
+    function scrollProjectImagesOnHoverInit(pixelsPerSecond = 150, reverseScrollDelay = 500, reverseScrollEnabled = 0) {
+        let pictureHoverContainer;
+        let pictureHoverImage;
+        let pictureHoverHeight;
+        let pictureHoverVisibleHeight;
+        let transitionHoverSpeed;
+        let clickedTwice = 0;
+        document.addEventListener("click", scrollProjectImageToBottomOnClick);
+        function scrollProjectImageToBottomOnClick(e) {
+            if (e.target.closest(".card-project__picture")) {
+                reverseScrollOnTheAllCards();
+                pictureHoverContainer = e.target.closest(".card-project__picture");
+                pictureHoverImage = pictureHoverContainer.querySelector("img");
+                pictureHoverHeight = pictureHoverImage.clientHeight;
+                pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
+                transitionHoverSpeed = pictureHoverVisibleHeight / pixelsPerSecond;
+                pictureHoverImage.style.top = `-${pictureHoverVisibleHeight}px`;
+                pictureHoverImage.style.transition = `top ${transitionHoverSpeed}s linear`;
+                pictureHoverImage.dataset.active = "1";
+                if (clickedTwice) {
+                    pictureHoverImage.style.top = `0px`;
+                    clickedTwice = 0;
+                } else clickedTwice = 1;
+                console.log(clickedTwice);
+            }
+        }
+        document.addEventListener("mouseover", scrollProjectImageToBottomOnHover);
+        function scrollProjectImageToBottomOnHover(e) {
+            if (e.target.closest(".card-project__picture")) {
+                pictureHoverContainer = e.target.closest(".card-project__picture");
+                pictureHoverImage = pictureHoverContainer.querySelector("img");
+                pictureHoverHeight = pictureHoverImage.clientHeight;
+                pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
+                transitionHoverSpeed = pictureHoverVisibleHeight / pixelsPerSecond;
+                pictureHoverImage.style.top = `-${pictureHoverVisibleHeight}px`;
+                pictureHoverImage.style.transition = `top ${transitionHoverSpeed}s linear`;
+                pictureHoverImage.dataset.active = "1";
+                clickedTwice = 1;
+            } else reverseScrollOnTheAllCards();
+        }
+        function reverseScrollOnTheAllCards() {
+            let pictureContainers = document.querySelectorAll(".card-project__picture");
+            for (let index = 0; index < pictureContainers.length; index++) {
+                const pictureContainer = pictureContainers[index];
+                const pictureImage = pictureContainer.querySelector("img");
+                let pictureHeight = pictureImage.clientHeight;
+                let pictureVisibleHeight = pictureHeight - pictureContainer.offsetHeight;
+                let transitionSpeed = pictureVisibleHeight / pixelsPerSecond;
+                pictureImage.dataset.active = "0";
+                pictureImage.style.transition = `top ${transitionSpeed}s linear`;
+                pictureImage.style.top = `0px`;
+            }
+        }
+        document.addEventListener("pointerdown", scrollProjectImageToBottomOnPointerOut);
+        function scrollProjectImageToBottomOnPointerOut(e) {
+            if (e.target.closest(".card-project__picture")) {
+                pictureHoverContainer = e.target.closest(".card-project__picture");
+                pictureHoverImage = pictureHoverContainer.querySelector("img");
+                if ("0" == pictureHoverImage.dataset.active) {
+                    clickedTwice = 0;
+                    reverseScrollOnTheAllCards();
+                }
+            }
+            if (!e.target.closest(".card-project__picture")) {
+                clickedTwice = 0;
+                reverseScrollOnTheAllCards();
+            }
+        }
+    }
     window["FLS"] = true;
     isWebp();
 })();
