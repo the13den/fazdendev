@@ -110,7 +110,6 @@
                 body.style.transformOrigin = `top left`;
                 body.style.transform = `scale(${resizeCoef})`;
                 body.style.width = `${resizeCoefPercents}%`;
-                console.log(`${resizeCoefPercents}%`);
                 body.style.height = `${resizeCoefPercents}%`;
             } else {
                 body.style.transform = ``;
@@ -126,7 +125,8 @@
     }
     firefoxAdaptiveSizePageScale();
     new SmoothScroll('a[href*="#"]', {
-        speed: 300
+        speed: 300,
+        updateURL: false
     });
     function initForm() {
         let formButton;
@@ -285,7 +285,7 @@
         function enableAnimation() {
             setTimeout((function() {
                 document.body.classList.remove("_first-load");
-            }), 300);
+            }), 500);
         }
     }
     function scrollProjectImagesOnHoverInit(pixelsPerSecond = 150, reverseScrollDelay = 500, reverseScrollEnabled = 0) {
@@ -311,7 +311,6 @@
                     pictureHoverImage.style.top = `0px`;
                     clickedTwice = 0;
                 } else clickedTwice = 1;
-                console.log(clickedTwice);
             }
         }
         if (matchMedia("(pointer:fine)").matches) {
@@ -361,6 +360,114 @@
             }
         }
     }
+    function multilanguageInit() {
+        let allLang = [ "en", "ru" ];
+        let languageSelects = document.querySelectorAll(".language-select");
+        function initLanguageSelect() {
+            let languageSelect = 0;
+            let languageSelectButton = 0;
+            let languageSelectOptions = 0;
+            let languageSelectInput = 0;
+            if (window.NodeList && !NodeList.prototype.forEach) NodeList.prototype.forEach = function(callback, thisArg) {
+                thisArg = thisArg || window;
+                for (var i = 0; i < this.length; i++) callback.call(thisArg, this[i], i, this);
+            };
+            function changeURLLanguage(languageSelectInput) {
+                let lang = languageSelectInput.value;
+                location.href = window.location.pathname + "#" + lang;
+                location.reload();
+            }
+            function changeSelectsValue() {
+                let hash = window.location.hash;
+                hash = hash.substr(1);
+                for (let index = 0; index < languageSelects.length; index++) {
+                    let languageSelect = languageSelects[index];
+                    let languageSelectButton = languageSelect.querySelector(".language-select__button");
+                    let languageSelectInput = languageSelect.querySelector("input");
+                    languageSelectInput.value = hash;
+                    languageSelectButton.innerText = hash;
+                    let languageSelectOptions = languageSelect.querySelectorAll(".language-select__option");
+                    let firstVisibleChildFound = 0;
+                    for (let index = 0; index < languageSelectOptions.length; index++) {
+                        const languageSelectOption = languageSelectOptions[index];
+                        if (languageSelectOption.dataset.value == `${hash}`) languageSelectOption.classList.add("_option-selected");
+                        if (languageSelectOption.dataset.value != `${hash}`) languageSelectOption.classList.remove("_option-selected");
+                        if (!languageSelectOptions[index].classList.contains("_option-selected")) {
+                            languageSelectOption.classList.add("_visible-child");
+                            if (!firstVisibleChildFound) languageSelectOption.classList.add("_first-visible-child");
+                            firstVisibleChildFound = 1;
+                        }
+                    }
+                }
+            }
+            function releaseOptions(e) {
+                function disableAndCloseSelects(languageSelect, languageSelectOptions) {
+                    if (languageSelect && languageSelectOptions.length) for (let index = 0; index < languageSelects.length; index++) {
+                        let languageSelect = languageSelects[index];
+                        languageSelect.classList.remove("_opened");
+                        languageSelect.classList.remove("_current-active");
+                        languageSelectOptions.forEach((function(languageSelectOption) {
+                            languageSelectOption.removeEventListener("click", (function(e) {}));
+                        }));
+                    }
+                    languageSelect = 0;
+                    languageSelectButton = 0;
+                    languageSelectOptions = 0;
+                }
+                if (languageSelect && languageSelectOptions.length && !e.target.closest(".language-select")) disableAndCloseSelects(languageSelect, languageSelectOptions);
+                if (e.target.closest(".language-select__button")) if (languageSelect && e.target.closest("._current-active")) if (languageSelect.classList.contains("_opened")) disableAndCloseSelects(languageSelect, languageSelectOptions); else languageSelect.classList.add("_opened"); else {
+                    disableAndCloseSelects(languageSelect, languageSelectOptions);
+                    languageSelect = e.target.closest(".language-select");
+                    languageSelectButton = languageSelect.querySelector(".language-select__button");
+                    languageSelectOptions = languageSelect.querySelectorAll(".language-select__option");
+                    languageSelectInput = languageSelect.querySelector("input");
+                    languageSelect.classList.add("_current-active");
+                    if (languageSelect.classList.contains("_opened")) disableAndCloseSelects(languageSelect, languageSelectOptions); else languageSelect.classList.add("_opened");
+                    if (languageSelectOptions.length) languageSelectOptions.forEach((function(languageSelectOption) {
+                        languageSelectOption.addEventListener("click", (function(e) {
+                            languageSelectInput.value = this.dataset.value;
+                            languageSelectButton.focus();
+                            changeURLLanguage(languageSelectInput);
+                            changeLanguage();
+                            changeSelectsValue();
+                            disableAndCloseSelects(languageSelect, languageSelectOptions);
+                        }));
+                    }));
+                }
+            }
+            document.addEventListener("click", releaseOptions);
+            document.addEventListener("keydown", (function(e) {
+                if (("Tab" === e.key || "Escape" === e.key) && languageSelect && languageSelectOptions.length) disableAndCloseSelects(languageSelect, languageSelectOptions);
+            }));
+            changeSelectsValue();
+        }
+        function changeLanguage() {
+            let hash = window.location.hash;
+            hash = hash.substr(1);
+            if (!allLang.includes(hash)) {
+                location.href = window.location.pathname + "#ru";
+                location.reload();
+            }
+            function readJson(path) {
+                let XHR = new XMLHttpRequest;
+                XHR.open("get", path, true);
+                XHR.send(null);
+                return XHR.responseText;
+            }
+            let langArr = JSON.parse(readJson("files/language-data/site-content.json"));
+            for (let key in langArr) if (key) {
+                let languageSelector = "[data-lang-key=" + `${key}` + "]";
+                let elems = document.querySelectorAll(languageSelector);
+                for (let index = 0; index < elems.length; index++) {
+                    const elem = elems[index];
+                    if (elem) if (langArr[key][hash] && "" == !langArr[key][hash]) elem.innerHTML = langArr[key][hash];
+                }
+            }
+        }
+        initLanguageSelect();
+        changeLanguage();
+    }
+    multilanguageInit();
     window["FLS"] = true;
     isWebp();
 })();
