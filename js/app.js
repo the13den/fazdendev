@@ -450,7 +450,7 @@
             }
             function readJson(path) {
                 let XHR = new XMLHttpRequest;
-                XHR.open("get", path, true);
+                XHR.open("get", path, false);
                 XHR.send(null);
                 return XHR.responseText;
             }
