@@ -297,70 +297,76 @@
         let clickedTwice = 0;
         document.addEventListener("click", scrollProjectImageToBottomOnClick);
         function scrollProjectImageToBottomOnClick(e) {
-            if (e.target.closest(".card-project__picture")) {
+            if (e.target.closest("._hover-scrollable")) {
                 reverseScrollOnTheAllCards();
-                pictureHoverContainer = e.target.closest(".card-project__picture");
+                pictureHoverContainer = e.target.closest("._hover-scrollable");
                 pictureHoverImage = pictureHoverContainer.querySelector("img");
-                pictureHoverHeight = pictureHoverImage.clientHeight;
-                pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
-                transitionHoverSpeed = pictureHoverVisibleHeight / pixelsPerSecond;
-                pictureHoverImage.style.top = `-${pictureHoverVisibleHeight}px`;
-                pictureHoverImage.style.transition = `top ${transitionHoverSpeed}s linear`;
-                pictureHoverImage.dataset.active = "1";
-                if (clickedTwice) {
-                    pictureHoverImage.style.top = `0px`;
-                    clickedTwice = 0;
-                } else clickedTwice = 1;
-            }
-        }
-        if (matchMedia("(pointer:fine)").matches) {
-            document.addEventListener("mouseover", scrollProjectImageToBottomOnHover);
-            function scrollProjectImageToBottomOnHover(e) {
-                clickedTwice = 0;
-                if (e.target.closest(".card-project__picture")) {
-                    reverseScrollOnTheAllCards();
-                    pictureHoverContainer = e.target.closest(".card-project__picture");
-                    pictureHoverImage = pictureHoverContainer.querySelector("img");
+                if (pictureHoverImage) {
                     pictureHoverHeight = pictureHoverImage.clientHeight;
                     pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
                     transitionHoverSpeed = pictureHoverVisibleHeight / pixelsPerSecond;
                     pictureHoverImage.style.top = `-${pictureHoverVisibleHeight}px`;
                     pictureHoverImage.style.transition = `top ${transitionHoverSpeed}s linear`;
                     pictureHoverImage.dataset.active = "1";
-                    clickedTwice = 1;
+                    if (clickedTwice) {
+                        pictureHoverImage.style.top = `0px`;
+                        clickedTwice = 0;
+                    } else clickedTwice = 1;
+                }
+            }
+        }
+        if (matchMedia("(pointer:fine)").matches) {
+            document.addEventListener("mouseover", scrollProjectImageToBottomOnHover);
+            function scrollProjectImageToBottomOnHover(e) {
+                clickedTwice = 0;
+                if (e.target.closest("._hover-scrollable")) {
+                    reverseScrollOnTheAllCards();
+                    pictureHoverContainer = e.target.closest("._hover-scrollable");
+                    pictureHoverImage = pictureHoverContainer.querySelector("img");
+                    if (pictureHoverImage) {
+                        pictureHoverHeight = pictureHoverImage.clientHeight;
+                        pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
+                        transitionHoverSpeed = pictureHoverVisibleHeight / pixelsPerSecond;
+                        pictureHoverImage.style.top = `-${pictureHoverVisibleHeight}px`;
+                        pictureHoverImage.style.transition = `top ${transitionHoverSpeed}s linear`;
+                        pictureHoverImage.dataset.active = "1";
+                        clickedTwice = 1;
+                    }
                 } else reverseScrollOnTheAllCards();
             }
         }
         function reverseScrollOnTheAllCards() {
-            let pictureContainers = document.querySelectorAll(".card-project__picture");
+            let pictureContainers = document.querySelectorAll("._hover-scrollable");
             for (let index = 0; index < pictureContainers.length; index++) {
                 const pictureContainer = pictureContainers[index];
                 const pictureImage = pictureContainer.querySelector("img");
-                let pictureHeight = pictureImage.clientHeight;
-                let pictureVisibleHeight = pictureHeight - pictureContainer.offsetHeight;
-                let transitionSpeed = pictureVisibleHeight / pixelsPerSecond;
-                pictureImage.dataset.active = "0";
-                pictureImage.style.transition = `top ${transitionSpeed}s linear`;
-                pictureImage.style.top = `0px`;
+                if (pictureImage) {
+                    let pictureHeight = pictureImage.clientHeight;
+                    let pictureVisibleHeight = pictureHeight - pictureContainer.offsetHeight;
+                    let transitionSpeed = pictureVisibleHeight / pixelsPerSecond;
+                    pictureImage.dataset.active = "0";
+                    pictureImage.style.transition = `top ${transitionSpeed}s linear`;
+                    pictureImage.style.top = `0px`;
+                }
             }
         }
         document.addEventListener("pointerdown", scrollProjectImageToBottomOnPointerOut);
         function scrollProjectImageToBottomOnPointerOut(e) {
-            if (e.target.closest(".card-project__picture")) {
-                pictureHoverContainer = e.target.closest(".card-project__picture");
+            if (e.target.closest("._hover-scrollable")) {
+                pictureHoverContainer = e.target.closest("._hover-scrollable");
                 pictureHoverImage = pictureHoverContainer.querySelector("img");
-                if ("0" == pictureHoverImage.dataset.active) {
+                if (pictureHoverImage) if ("0" == pictureHoverImage.dataset.active) {
                     clickedTwice = 0;
                     reverseScrollOnTheAllCards();
                 }
             }
-            if (!e.target.closest(".card-project__picture")) {
+            if (!e.target.closest("._hover-scrollable")) {
                 clickedTwice = 0;
                 reverseScrollOnTheAllCards();
             }
         }
     }
-    function multilanguageInit() {
+    async function multilanguageInit() {
         let allLang = [ "en", "ru" ];
         let languageSelects = document.querySelectorAll(".language-select");
         function initLanguageSelect() {
@@ -375,7 +381,6 @@
             function changeURLLanguage(languageSelectInput) {
                 let lang = languageSelectInput.value;
                 location.href = window.location.pathname + "#" + lang;
-                location.reload();
             }
             function changeSelectsValue() {
                 let hash = window.location.hash;
@@ -400,7 +405,7 @@
                     }
                 }
             }
-            function releaseOptions(e) {
+            async function releaseOptions(e) {
                 function disableAndCloseSelects(languageSelect, languageSelectOptions) {
                     if (languageSelect && languageSelectOptions.length) for (let index = 0; index < languageSelects.length; index++) {
                         let languageSelect = languageSelects[index];
@@ -441,20 +446,21 @@
             }));
             changeSelectsValue();
         }
-        function changeLanguage() {
+        async function changeLanguage() {
             let hash = window.location.hash;
             hash = hash.substr(1);
             if (!allLang.includes(hash)) {
                 location.href = window.location.pathname + "#ru";
                 location.reload();
             }
-            function readJson(path) {
-                let XHR = new XMLHttpRequest;
-                XHR.open("get", path, false);
-                XHR.send(null);
-                return XHR.responseText;
+            async function readJson(path) {
+                let response = await fetch(path);
+                if (response.ok) {
+                    let json = await response.text();
+                    return json;
+                } else alert("Ошибка получения языковых данных: " + response.status);
             }
-            let langArr = JSON.parse(readJson("files/language-data/site-content.json"));
+            let langArr = JSON.parse(await readJson("files/language-data/site-content.json"));
             for (let key in langArr) if (key) {
                 let languageSelector = "[data-lang-key=" + `${key}` + "]";
                 let elems = document.querySelectorAll(languageSelector);
@@ -465,7 +471,7 @@
             }
         }
         initLanguageSelect();
-        changeLanguage();
+        await changeLanguage();
     }
     multilanguageInit();
     window["FLS"] = true;

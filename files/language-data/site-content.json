@@ -45,7 +45,7 @@
   },
   "cardProjectTechnologies": {
     "ru": "Технологии:",
-    "en": "Technologies"
+    "en": "Technologies:"
   },
   "cardProjectDirectLink": {
     "ru": "Прямая ссылка",
@@ -70,6 +70,14 @@
   "cardProjectPotfolioInfo": {
     "ru": "Написан на HTML, CSS и Java Script. Применена методология БЭМ. Создана форма обратной связи через Google AppScript, она работает даже на статических страницах. Реализована темная тема и ангийская версия сайта. Также присутствуют динамические карточки проектов, которые при наведении начинают свою прокрутку.",
     "en": "Written on HTML, CSS and Java Script.The BEM methodology is applied.The feedback form has been created through Google Appscript, it works even on static pages.The dark theme and the Angiye version of the site have been implemented.There are also dynamic projects of projects that begin to scroll their scrolling."
+  },
+  "cardProjectBlurTubeTitle": {
+    "ru": "Браузерное расширение BlurTube",
+    "en": "Blurtube browser extension"
+  },
+  "cardProjectBlurTubeInfo": {
+    "ru": "BlurTube предназначен для сконцетрированной работы на YouTube. Он размывает обложки видео, что делает выбор контента для просмотра более обдуманым. Расширение доступно для ручной установки в Google Chrome или для установки через магазин расширений в Firefox.",
+    "en": "Blurtube is designed for embarrassed work on YouTube. It blurs the videos preview, which makes the choose of the content for viewing more thoughtful. Expansion is available for manual installation in Google Chrome or for installation through the extension store in Firefox."
   },
   "contactsTitle": {
     "ru": "Контакты",
