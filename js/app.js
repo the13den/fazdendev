@@ -126,7 +126,8 @@
     firefoxAdaptiveSizePageScale();
     new SmoothScroll('a[href*="#"]', {
         speed: 300,
-        updateURL: false
+        updateURL: false,
+        header: "[data-scroll-header]"
     });
     function initForm() {
         let formButton;
@@ -366,18 +367,25 @@
             }
         }
     }
+    let polifylForEachInitialized = 0;
+    function initPolifylForEach() {
+        if (window.NodeList && !NodeList.prototype.forEach && !polifylForEachInitialized) {
+            NodeList.prototype.forEach = function(callback, thisArg) {
+                thisArg = thisArg || window;
+                for (var i = 0; i < this.length; i++) callback.call(thisArg, this[i], i, this);
+            };
+            polifylForEachInitialized = 1;
+        }
+    }
     async function multilanguageInit() {
         let allLang = [ "en", "ru" ];
         let languageSelects = document.querySelectorAll(".language-select");
         function initLanguageSelect() {
+            initPolifylForEach();
             let languageSelect = 0;
             let languageSelectButton = 0;
             let languageSelectOptions = 0;
             let languageSelectInput = 0;
-            if (window.NodeList && !NodeList.prototype.forEach) NodeList.prototype.forEach = function(callback, thisArg) {
-                thisArg = thisArg || window;
-                for (var i = 0; i < this.length; i++) callback.call(thisArg, this[i], i, this);
-            };
             function changeURLLanguage(languageSelectInput) {
                 let lang = languageSelectInput.value;
                 location.href = window.location.pathname + "#" + lang;
@@ -474,6 +482,69 @@
         await changeLanguage();
     }
     multilanguageInit();
+    function projectsVideoPlayerInit() {
+        let options = {};
+        const videoObserver = new IntersectionObserver(playPauseVideo, options);
+        let projectVideos = document.querySelectorAll(".lazy-video-parent video");
+        let projectVideosParent = document.querySelectorAll(".lazy-video-parent");
+        if (projectVideos.length) {
+            initPolifylForEach();
+            projectVideos.forEach((video => videoObserver.observe(video)));
+        }
+        if (projectVideosParent.length) {
+            initPolifylForEach();
+            projectVideosParent.forEach((parent => {
+                console.log(parent);
+                let video = parent.querySelector("video");
+                console.log(video);
+                video.ontimeupdate = function() {
+                    parent.classList.remove("lazy-video-parent_loading");
+                };
+                video.onwaiting = function() {
+                    parent.classList.add("lazy-video-parent_loading");
+                };
+            }));
+        }
+        function playPauseVideo(entries) {
+            entries.forEach((entry => {
+                if (entry.isIntersecting) {
+                    let projectVideo = entry.target;
+                    entry.target.closest(".card-project__picture");
+                    projectVideo.play();
+                }
+                if (false == entry.isIntersecting) {
+                    let projectVideo = entry.target;
+                    projectVideo.pause();
+                }
+            }));
+        }
+    }
+    projectsVideoPlayerInit();
+    function lazyLoadingImageInit() {
+        let options = {};
+        const imageObserver = new IntersectionObserver(lazyLoadImages, options);
+        let lazyImages = document.querySelectorAll("img[data-src], source[data-srcset]");
+        if (lazyImages.length) {
+            initPolifylForEach();
+            lazyImages.forEach((image => imageObserver.observe(image)));
+        }
+        function lazyLoadImages(entries) {
+            entries.forEach((entry => {
+                if (entry.isIntersecting) if (entry.target.matches("img[data-src]") && "" != entry.target.dataset.src) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.removeAttribute("data-src");
+                    imageObserver.unobserve(lazyImage);
+                } else if (entry.target.matches("source[data-srcset]") && "" != entry.target.dataset.srcset) {
+                    let lazyImage = entry.target;
+                    lazyImage.srcset = lazyImage.dataset.srcset;
+                    lazyImage.removeAttribute("data-srcset");
+                    imageObserver.unobserve(lazyImage);
+                }
+            }));
+        }
+    }
+    lazyLoadingImageInit();
     window["FLS"] = true;
     isWebp();
 })();

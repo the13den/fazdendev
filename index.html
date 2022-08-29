@@ -9,7 +9,7 @@
 	<meta name="description" content="This the official fazdendev`s site" />
 	<meta name="keywords" content="HTML, CSS, Java Script, Frontend, Фазалов Денис, Fazalov Denis, fazdendev, portfolio, портфолио" />
 	<meta name="author" content="Fazalov Denis" />
-	<link rel="stylesheet" href="css/style.min.css?_v=20220826174944" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20220829222949" />
 	<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
 	<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
 	<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
@@ -19,7 +19,7 @@
 
 <body class="_first-load">
 	<div class="wrapper">
-		<header class="header _menu-loaded">
+		<header data-scroll-header class="header _menu-loaded">
 			<div class="header__container">
 				<a href="#" class="header__logo logo">fazdendev</a>
 				<div class="menu-header">
@@ -132,7 +132,7 @@
 					<div class="project__cards">
 						<div class="project__card">
 							<div class="card-project">
-								<div class="card-project__picture _hover-scrollable"><picture><source srcset="img/projects/insight.webp" type="image/webp"><img data-active="0" src="img/projects/insight.png" alt="insight landing main-page" /></picture></div>
+								<div class="card-project__picture _hover-scrollable lazy-load-parent"><picture><source data-srcset="img/projects/insight.webp" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" type="image/webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  data-active="0" src="img/lazy-loading/1px.png" data-src="img/projects/insight.png" alt="insight landing main-page" /></picture></div>
 								<div class="card-project__content">
 									<h4 class="card-project__title" data-lang-key="cardProjectInsightTitle">Insight Landing Page</h4>
 									<h6 class="card-project__info" data-lang-key="cardProjectInsightInfo">В его основе лежит чистый код HTML, CSS и Java Script. Для создания структуры HTML применена методология БЭМ. При клике по несушествующему разделу появляется попап. Реализован кастомный скроллбар. В мобильной версии сайта, пукты навигации внизу сайта сворачиваются в разворачиваеммые списки.</h6>
@@ -150,7 +150,7 @@
 						</div>
 						<div class="project__card">
 							<div class="card-project">
-								<div class="card-project__picture _hover-scrollable"><picture><source srcset="img/projects/healthy-switcher.webp" type="image/webp"><img data-active="0" src="img/projects/healthy-switcher.jpg" alt="healthy-switcher landing" /></picture></div>
+								<div class="card-project__picture _hover-scrollable lazy-load-parent"><picture><source data-srcset="img/projects/healthy-switcher.webp" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" type="image/webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  data-active="0" src="img/lazy-loading/1px.png" data-src="img/projects/healthy-switcher.jpg" alt="healthy-switcher landing" /></picture></div>
 								<div class="card-project__content">
 									<h4 class="card-project__title" data-lang-key="cardProjectHsTitle">HEALTHY SWITCHER Landing Page</h4>
 									<h6 class="card-project__info" data-lang-key="cardProjectHsInfo">Основа кода написана на HTML, CSS и Java Script. Применена методология БЭМ. На сайте есть звездный рейтинг блюд, готовый отправлять оценку клиента на сервер и выводить среднее значение с него. Реализована анимация при скролле. Присутствует слайдер, на базе библиотеки Swiper.</h6>
@@ -168,7 +168,7 @@
 						</div>
 						<div class="project__card">
 							<div class="card-project">
-								<div class="card-project__picture _hover-scrollable"><picture><source srcset="img/projects/fdd.webp" type="image/webp"><img data-active="0" src="img/projects/fdd.jpg" alt="fazdendev site" /></picture></div>
+								<div class="card-project__picture _hover-scrollable lazy-load-parent"><picture><source data-srcset="img/projects/fdd.webp" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" type="image/webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  data-active="0" src="img/lazy-loading/1px.png" data-src="img/projects/fdd.jpg" alt="fazdendev site" /></picture></div>
 								<div class="card-project__content">
 									<h4 class="card-project__title" data-lang-key="cardProjectPotfolioTitle">Сайт портфолио</h4>
 									<h6 class="card-project__info" data-lang-key="cardProjectPotfolioInfo">Написан на HTML, CSS и Java Script. Применена методология БЭМ. Создана форма обратной связи через Google AppScript, она работает даже на статических страницах. Реализована темная тема и ангийская версия сайта. Также присутствуют динамические карточки проектов, которые при наведении начинают свою прокрутку.</h6>
@@ -186,7 +186,7 @@
 						</div>
 						<div class="project__card">
 							<div class="card-project">
-								<div class="card-project__picture"><video src="img/projects/BlurTube.mp4" loop muted controls autoplay></video></div>
+								<div class="card-project__picture lazy-load-parent lazy-video-parent lazy-video-parent_loading"><video src="img/projects/BlurTube.mp4" preload="metadata" loop muted></video></div>
 								<div class="card-project__content">
 									<h4 class="card-project__title" data-lang-key="cardProjectBlurTubeTitle">Браузерное расширение BlurTube</h4>
 									<h6 class="card-project__info" data-lang-key="cardProjectBlurTubeInfo">BlurTube предназначен для сконцетрированной работы на YouTube. Он размывает обложки видео, что делает выбор контента для просмотра более обдуманным. Расширение доступно для ручной установки в Google Chrome или для установки через магазин расширений в Firefox</h6>
@@ -214,8 +214,8 @@
 					<div class="contacts__wrapper">
 						<div class="contacts__content">
 							<h1 class="contacts__headline-text headline-text" data-lang-key="contactsHeadlineText">Оставьте вопрос и я вам отвечу!</h1>
-							<div class="contacts__background background">
-								<picture><source srcset="img/contacts/coding-img.webp" type="image/webp"><img src="img/contacts/coding-img.jpg" alt="coding process img" /></picture>
+							<div class="contacts__background background lazy-load-parent">
+								<picture><source data-srcset="img/contacts/coding-img.webp" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" type="image/webp"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="  src="img/lazy-loading/1px.png" data-src="img/contacts/coding-img.jpg" alt="coding process img" /></picture>
 							</div>
 						</div>
 						<div class="contacts__column">
@@ -315,8 +315,8 @@
 		</footer>
 
 	</div>
-	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js?_v=20220826174944"></script>
-	<script src="js/app.min.js?_v=20220826174944"></script>
+	<script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js?_v=20220829222949"></script>
+	<script src="js/app.min.js?_v=20220829222949"></script>
 
 </body>
 

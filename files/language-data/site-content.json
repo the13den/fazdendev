@@ -72,7 +72,7 @@
     "en": "Written on HTML, CSS and Java Script.The BEM methodology is applied.The feedback form has been created through Google Appscript, it works even on static pages.The dark theme and the Angiye version of the site have been implemented.There are also dynamic projects of projects that begin to scroll their scrolling."
   },
   "cardProjectBlurTubeTitle": {
-    "ru": "Браузерное расширение BlurTube",
+    "ru": "BlurTube браузерное расширение",
     "en": "Blurtube browser extension"
   },
   "cardProjectBlurTubeInfo": {
@@ -124,7 +124,7 @@
     "en": "Repeat the sending?"
   },
   "feedbackFormButtonSent": {
-    "ru": "Сообщени уже отправленно",
+    "ru": "Сообщение уже отправленно",
     "en": "The message has been sent"
   },
   "feedbackFormButtonSentSuccefully": {
