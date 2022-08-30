@@ -761,6 +761,21 @@ body {
   border-bottom: 0px !important;
 }
 
+.lazy-video-parent_seeking video {
+  opacity: 0;
+}
+
+.lazy-video-parent_loading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/lazy-loading/loading-svg_white.svg) center/70px 70px no-repeat;
+  z-index: 2;
+}
+
 .lazy-load-parent {
   position: relative;
   background-color: #42446e;
@@ -778,6 +793,7 @@ body {
 .lazy-load-parent video {
   position: relative;
   z-index: 1;
+  opacity: 1;
 }
 
 .lazy-load-parent::after {
@@ -793,17 +809,6 @@ body {
           transform: translate(-50%, -50%);
   z-index: 0;
   opacity: 0.4;
-}
-
-.lazy-video-parent_loading::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: url(../img/lazy-loading/loading-svg_white.svg) center/70px 70px no-repeat;
-  z-index: 2;
 }
 
 .theme-button {
@@ -913,7 +918,13 @@ body {
   width: 100%;
 }
 
-.background img {
+.background picture {
+  height: 100%;
+  width: 100%;
+}
+
+.background img,
+.background source {
   -o-object-fit: cover;
      object-fit: cover;
   height: 100%;
@@ -1762,7 +1773,6 @@ body {
 
 .main-screen {
   min-height: 100vh;
-  max-height: 1500px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1951,11 +1961,31 @@ body {
   cursor: pointer;
 }
 
-.card-project__picture img {
+.card-project__picture picture {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+  height: 100%;
+  z-index: 2;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+  -webkit-transition: top 5s;
+  -o-transition: top 5s;
+  transition: top 5s;
+}
+
+.card-project__picture img,
+.card-project__picture source,
+.card-project__picture video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: top;
@@ -1967,15 +1997,6 @@ body {
 
 .card-project__picture video {
   aspect-ratio: 16/9;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  -o-object-position: top;
-     object-position: top;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .card-project__content {
@@ -2182,20 +2203,6 @@ body {
   position: relative;
   z-index: 4;
   color: #fff;
-}
-
-.contacts__background {
-  z-index: 1;
-}
-
-.contacts__background img {
-  position: relative;
-  z-index: 1;
-}
-
-.contacts__background picture {
-  position: relative;
-  z-index: 1;
 }
 
 .contacts__column {

@@ -302,6 +302,10 @@
                 reverseScrollOnTheAllCards();
                 pictureHoverContainer = e.target.closest("._hover-scrollable");
                 pictureHoverImage = pictureHoverContainer.querySelector("img");
+                if (e.target.closest("source")) {
+                    console.log(e.target);
+                    pictureHoverImage = pictureHoverContainer.querySelector("source");
+                } else if (e.target.closest("img")) pictureHoverImage = pictureHoverContainer.querySelector("img");
                 if (pictureHoverImage) {
                     pictureHoverHeight = pictureHoverImage.clientHeight;
                     pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
@@ -380,6 +384,12 @@
     async function multilanguageInit() {
         let allLang = [ "en", "ru" ];
         let languageSelects = document.querySelectorAll(".language-select");
+        let hash = window.location.hash;
+        hash = hash.substr(1);
+        if (!allLang.includes(hash)) {
+            location.href = window.location.pathname + "#ru";
+            return multilanguageInit();
+        }
         function initLanguageSelect() {
             initPolifylForEach();
             let languageSelect = 0;
@@ -413,7 +423,7 @@
                     }
                 }
             }
-            async function releaseOptions(e) {
+            function releaseOptions(e) {
                 function disableAndCloseSelects(languageSelect, languageSelectOptions) {
                     if (languageSelect && languageSelectOptions.length) for (let index = 0; index < languageSelects.length; index++) {
                         let languageSelect = languageSelects[index];
@@ -439,7 +449,12 @@
                     if (languageSelectOptions.length) languageSelectOptions.forEach((function(languageSelectOption) {
                         languageSelectOption.addEventListener("click", (function(e) {
                             languageSelectInput.value = this.dataset.value;
-                            languageSelectButton.focus();
+                            console.log(languageSelect);
+                            console.log(languageSelectButton);
+                            if (languageSelectButton) languageSelectButton.focus(); else if (languageSelect) {
+                                languageSelectButton = languageSelect.querySelector(".language-select__button");
+                                if (languageSelectButton) languageSelectButton.focus();
+                            }
                             changeURLLanguage(languageSelectInput);
                             changeLanguage();
                             changeSelectsValue();
@@ -457,10 +472,6 @@
         async function changeLanguage() {
             let hash = window.location.hash;
             hash = hash.substr(1);
-            if (!allLang.includes(hash)) {
-                location.href = window.location.pathname + "#ru";
-                location.reload();
-            }
             async function readJson(path) {
                 let response = await fetch(path);
                 if (response.ok) {
@@ -479,37 +490,53 @@
             }
         }
         initLanguageSelect();
-        await changeLanguage();
+        changeLanguage();
     }
     multilanguageInit();
     function projectsVideoPlayerInit() {
         let options = {};
-        const videoObserver = new IntersectionObserver(playPauseVideo, options);
+        const videoPlayPauseObserver = new IntersectionObserver(playPauseVideo, options);
+        const videoSrcObserver = new IntersectionObserver(setVideoSrc, options);
         let projectVideos = document.querySelectorAll(".lazy-video-parent video");
         let projectVideosParent = document.querySelectorAll(".lazy-video-parent");
         if (projectVideos.length) {
             initPolifylForEach();
-            projectVideos.forEach((video => videoObserver.observe(video)));
+            projectVideos.forEach((video => videoPlayPauseObserver.observe(video)));
+            projectVideos.forEach((video => videoSrcObserver.observe(video)));
         }
         if (projectVideosParent.length) {
             initPolifylForEach();
             projectVideosParent.forEach((parent => {
-                console.log(parent);
                 let video = parent.querySelector("video");
-                console.log(video);
-                video.ontimeupdate = function() {
-                    parent.classList.remove("lazy-video-parent_loading");
-                };
-                video.onwaiting = function() {
-                    parent.classList.add("lazy-video-parent_loading");
-                };
+                if (video) {
+                    parent.classList.add("lazy-video-parent_seeking");
+                    video.onwaiting = function() {
+                        parent.classList.remove("lazy-video-parent_seeking");
+                        parent.classList.add("lazy-video-parent_loading");
+                    };
+                    video.ontimeupdate = function() {
+                        parent.classList.remove("lazy-video-parent_seeking");
+                        parent.classList.remove("lazy-video-parent_loading");
+                    };
+                }
+            }));
+        }
+        function setVideoSrc(entries) {
+            entries.forEach((entry => {
+                if (entry.isIntersecting && entry.target.matches("video[data-src]") && "" != entry.target.dataset.src) {
+                    let lazyVideo = entry.target;
+                    lazyVideo.src = lazyVideo.dataset.src;
+                    lazyVideo.removeAttribute("data-src");
+                    lazyVideo.load();
+                    lazyVideo.play();
+                    videoSrcObserver.unobserve(lazyVideo);
+                }
             }));
         }
         function playPauseVideo(entries) {
             entries.forEach((entry => {
                 if (entry.isIntersecting) {
                     let projectVideo = entry.target;
-                    entry.target.closest(".card-project__picture");
                     projectVideo.play();
                 }
                 if (false == entry.isIntersecting) {
