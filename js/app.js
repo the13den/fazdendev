@@ -121,7 +121,7 @@
     }
     function firefoxAdaptiveSizePageScale(startWidth = 320) {
         let userAgent = navigator.userAgent;
-        if (userAgent.includes("irefox")) adaptiveSizePageScale();
+        if (userAgent.includes("Firefox")) adaptiveSizePageScale();
     }
     firefoxAdaptiveSizePageScale();
     new SmoothScroll('a[href*="#"]', {
@@ -298,14 +298,10 @@
         let clickedTwice = 0;
         document.addEventListener("click", scrollProjectImageToBottomOnClick);
         function scrollProjectImageToBottomOnClick(e) {
-            if (e.target.closest("._hover-scrollable")) {
+            if (e.target.closest(".card-project__picture")) {
                 reverseScrollOnTheAllCards();
-                pictureHoverContainer = e.target.closest("._hover-scrollable");
+                pictureHoverContainer = e.target.closest(".card-project__picture");
                 pictureHoverImage = pictureHoverContainer.querySelector("img");
-                if (e.target.closest("source")) {
-                    console.log(e.target);
-                    pictureHoverImage = pictureHoverContainer.querySelector("source");
-                } else if (e.target.closest("img")) pictureHoverImage = pictureHoverContainer.querySelector("img");
                 if (pictureHoverImage) {
                     pictureHoverHeight = pictureHoverImage.clientHeight;
                     pictureHoverVisibleHeight = pictureHoverHeight - pictureHoverContainer.offsetHeight;
@@ -324,9 +320,9 @@
             document.addEventListener("mouseover", scrollProjectImageToBottomOnHover);
             function scrollProjectImageToBottomOnHover(e) {
                 clickedTwice = 0;
-                if (e.target.closest("._hover-scrollable")) {
+                if (e.target.closest(".card-project__picture")) {
                     reverseScrollOnTheAllCards();
-                    pictureHoverContainer = e.target.closest("._hover-scrollable");
+                    pictureHoverContainer = e.target.closest(".card-project__picture");
                     pictureHoverImage = pictureHoverContainer.querySelector("img");
                     if (pictureHoverImage) {
                         pictureHoverHeight = pictureHoverImage.clientHeight;
@@ -341,7 +337,7 @@
             }
         }
         function reverseScrollOnTheAllCards() {
-            let pictureContainers = document.querySelectorAll("._hover-scrollable");
+            let pictureContainers = document.querySelectorAll(".card-project__picture");
             for (let index = 0; index < pictureContainers.length; index++) {
                 const pictureContainer = pictureContainers[index];
                 const pictureImage = pictureContainer.querySelector("img");
@@ -357,15 +353,15 @@
         }
         document.addEventListener("pointerdown", scrollProjectImageToBottomOnPointerOut);
         function scrollProjectImageToBottomOnPointerOut(e) {
-            if (e.target.closest("._hover-scrollable")) {
-                pictureHoverContainer = e.target.closest("._hover-scrollable");
+            if (e.target.closest(".card-project__picture")) {
+                pictureHoverContainer = e.target.closest(".card-project__picture");
                 pictureHoverImage = pictureHoverContainer.querySelector("img");
                 if (pictureHoverImage) if ("0" == pictureHoverImage.dataset.active) {
                     clickedTwice = 0;
                     reverseScrollOnTheAllCards();
                 }
             }
-            if (!e.target.closest("._hover-scrollable")) {
+            if (!e.target.closest(".card-project__picture")) {
                 clickedTwice = 0;
                 reverseScrollOnTheAllCards();
             }
