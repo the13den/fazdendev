@@ -280,66 +280,6 @@ body {
   transition: all 0s 0s !important;
 }
 
-@-webkit-keyframes gradientDark {
-  0% {
-    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), color-stop(150%, #42446e));
-    background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 150%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  100% {
-    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #38c71f), color-stop(150%, #42446e));
-    background: linear-gradient(90deg, #38c71f -2.06%, #42446e 150%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-}
-
-@keyframes gradientDark {
-  0% {
-    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), color-stop(150%, #42446e));
-    background: -o-linear-gradient(left, #2e9f32 -2.06%, #42446e 150%);
-    background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 150%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  100% {
-    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #38c71f), color-stop(150%, #42446e));
-    background: -o-linear-gradient(left, #38c71f -2.06%, #42446e 150%);
-    background: linear-gradient(90deg, #38c71f -2.06%, #42446e 150%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-}
-
-@-webkit-keyframes gradientHover {
-  0% {
-    background-size: 100%;
-  }
-
-  100% {
-    background-size: 145%;
-    background-position: 10%;
-  }
-}
-
-@keyframes gradientHover {
-  0% {
-    background-size: 100%;
-  }
-
-  100% {
-    background-size: 145%;
-    background-position: 10%;
-  }
-}
-
 ._animation-started .clicking-anim {
   position: absolute;
   top: 50%;
@@ -442,28 +382,6 @@ body {
   }
 }
 
-@-webkit-keyframes gradientHoverReverse {
-  0% {
-    background-size: 145%;
-    background-position: 10%;
-  }
-
-  100% {
-    background-size: 100%;
-  }
-}
-
-@keyframes gradientHoverReverse {
-  0% {
-    background-size: 145%;
-    background-position: 10%;
-  }
-
-  100% {
-    background-size: 100%;
-  }
-}
-
 .logo {
   font-weight: 700;
   font-size: 2rem;
@@ -473,30 +391,34 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), to(#42446e));
-  background: -o-linear-gradient(left, #2e9f32 -2.06%, #42446e 100%);
-  background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 100%);
-  -webkit-background-clip: text;
-  -webkit-animation: gradientHoverReverse 0.3s forwards;
-          animation: gradientHoverReverse 0.3s forwards;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #31903c;
   z-index: 2;
 }
 
-.theme_light .logo {
-  -webkit-animation: gradientHoverReverse 0.5s forwards;
-          animation: gradientHoverReverse 0.5s forwards;
-}
-
-.theme_light .logo:hover {
-  -webkit-animation: gradientHover 0.5s forwards;
-          animation: gradientHover 0.5s forwards;
+@supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  .logo {
+    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), to(#42446e));
+    background: -o-linear-gradient(left, #2e9f32 -2.06%, #42446e 100%);
+    background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .theme_dark .logo {
-  -webkit-animation: gradientDark 0.5s forwards;
-          animation: gradientDark 0.5s forwards;
+  color: #31903c;
+}
+
+@supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  .theme_dark .logo {
+    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #38c71f), color-stop(150%, #42446e));
+    background: -o-linear-gradient(left, #38c71f -2.06%, #42446e 150%);
+    background: linear-gradient(90deg, #38c71f -2.06%, #42446e 150%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .headline-text {
@@ -507,17 +429,33 @@ body {
 }
 
 .gradient-highlight {
-  background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), to(#42446e));
-  background: -o-linear-gradient(left, #2e9f32 -2.06%, #42446e 100%);
-  background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #31903c;
 }
 
 .theme_dark .gradient-highlight {
-  -webkit-animation: gradientDark 0s forwards;
-          animation: gradientDark 0s forwards;
+  color: #31903c;
+}
+
+@supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  .theme_dark .gradient-highlight {
+    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #38c71f), color-stop(150%, #42446e));
+    background: -o-linear-gradient(left, #38c71f -2.06%, #42446e 150%);
+    background: linear-gradient(90deg, #38c71f -2.06%, #42446e 150%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@supports (-webkit-background-clip: text) and (-webkit-text-fill-color: transparent) and ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gradient-highlight {
+    background: -webkit-gradient(linear, left top, right top, color-stop(-2.06%, #2e9f32), to(#42446e));
+    background: -o-linear-gradient(left, #2e9f32 -2.06%, #42446e 100%);
+    background: linear-gradient(90deg, #2e9f32 -2.06%, #42446e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 }
 
 .emoji {
@@ -601,13 +539,13 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-transition: color 0.3s, background 0.3s, outline 0.3s, border 0.3s;
+  -o-transition: color 0.3s, background 0.3s, outline 0.3s, border 0.3s;
+  transition: color 0.3s, background 0.3s, outline 0.3s, border 0.3s;
 }
 
 .round-button:hover {
   background: #42446e;
-  -webkit-transition: color 0.3s, background 0.3s, outline 0.3s;
-  -o-transition: color 0.3s, background 0.3s, outline 0.3s;
-  transition: color 0.3s, background 0.3s, outline 0.3s;
   outline: 2px solid #31903c;
 }
 
@@ -625,9 +563,6 @@ body {
 .theme_dark .round-button:hover::before {
   background: #1c1b22;
   color: #fff;
-  -webkit-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
-  -o-transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
-  transition: color 0.3s, background 0.3s, outline 0s, border 0.3s !important;
 }
 
 .round-button_filled {
@@ -1522,16 +1457,6 @@ body {
   cursor: pointer;
 }
 
-.icon-menu:hover span {
-  background-size: 250%;
-  background-position: 100%;
-}
-
-.theme_dark .icon-menu:hover span {
-  background-position: 0%;
-  background-size: 600%;
-}
-
 .icon-menu span {
   display: block;
   position: absolute;
@@ -1548,9 +1473,9 @@ body {
   -webkit-transform: rotate(0deg);
       -ms-transform: rotate(0deg);
           transform: rotate(0deg);
-  -webkit-transition: 0.2s ease-in-out, background 0.5s;
-  -o-transition: 0.2s ease-in-out, background 0.5s;
-  transition: 0.2s ease-in-out, background 0.5s;
+  -webkit-transition: 0.2s ease-in-out;
+  -o-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .theme_dark .icon-menu span {

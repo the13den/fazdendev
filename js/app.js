@@ -119,11 +119,11 @@
             }
         }
     }
-    function firefoxAdaptiveSizePageScale(startWidth = 320) {
+    function browserPageScaleInit(startWidth = 320) {
         let userAgent = navigator.userAgent;
-        if (userAgent.includes("Firefox")) adaptiveSizePageScale();
+        if (userAgent.includes("Firefox") || userAgent.includes("Safari")) adaptiveSizePageScale();
     }
-    firefoxAdaptiveSizePageScale();
+    browserPageScaleInit();
     new SmoothScroll('a[href*="#"]', {
         speed: 300,
         updateURL: false,
